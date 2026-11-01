@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b35">
+  <title>Fraud Scanner | Stay Safe Online</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span class="brand-icon">盾</span><span>Fraud<span class="brand-accent">Scanner</span></span></a>
+  <nav><a href="#scanner">Scanner</a><a href="#history">History</a><a href="#report">Report Fraud</a><a href="#alerts">Alerts</a></nav>
+  <button class="outline-btn" id="authToggle">Login / Register</button>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">YOUR DIGITAL SAFETY COMPANION</span>
+      <h1>Detect fraud.<br><span>Stay one step ahead.</span></h1>
+      <p>Check suspicious links, emails and messages before you trust them. Get a quick risk assessment and practical safety tips.</p>
+      <a class="primary-btn" href="#scanner">Start a free scan <span>→</span></a>
+      <div class="trust-note"><span class="dot"></span> Simple rule-based checks · No-cost demo</div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="shield">✓</div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+      <span class="float-card card-a">🔒 Secure check</span><span class="float-card card-b">⚠ Risk detection</span>
+    </div>
+  </section>
+
+  <section class="stats-grid" id="stats">
+    <article class="stat-card"><span>Total scans</span><strong id="totalScans">0</strong><small>Scans completed</small></article>
+    <article class="stat-card"><span>High-risk scans</span><strong id="highRisk">0</strong><small>High or critical results</small></article>
+    <article class="stat-card"><span>Fraud reports</span><strong id="totalReports">0</strong><small>Reports submitted here</small></article>
+  </section>
+
+  <section class="section" id="scanner">
+    <div class="section-heading"><div><span class="eyebrow">QUICK SECURITY CHECK</span><h2>Scan suspicious content</h2><p>Choose what you want to check and paste the content below.</p></div><span class="section-number">01 / SCAN</span></div>
+    <div class="scanner-layout">
+      <div class="panel scanner-panel">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-type="url">🔗 URL</button>
+          <button class="tab" data-type="email">✉ Email</button>
+          <button class="tab" data-type="message">▤ Message</button>
+        </div>
+        <label id="contentLabel" for="scanContent">Website URL</label>
+        <textarea id="scanContent" rows="5" placeholder="Paste a suspicious URL, for example https://example.com"></textarea>
+        <div id="senderWrap" class="sender-wrap hidden"><label for="senderEmail">Sender email (optional)</label><input id="senderEmail" type="email" placeholder="sender@example.com"></div>
+        <div class="scan-actions"><span class="hint">Your content is checked by configured warning rules.</span><button class="primary-btn" id="scanBtn">Analyze now <span>→</span></button></div>
+        <p class="disclaimer">This demo is not a guarantee that a website or message is safe. Always verify important information independently.</p>
+      </div>
+      <div class="panel result-panel" id="resultPanel">
+        <div class="empty-result"><div class="empty-icon">⌕</div><h3>Your scan result will appear here</h3><p>Submit content to see a risk score, detected indicators and recommendations.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="history">
+    <div class="section-heading"><div><span class="eyebrow">YOUR ACTIVITY</span><h2>Recent scan history</h2><p>The latest scans recorded during this server session.</p></div><span class="section-number">02 / HISTORY</span></div>
+    <div class="panel table-panel"><div class="table-scroll"><table><thead><tr><th>Content</th><th>Type</th><th>Risk score</th><th>Risk level</th><th>Time</th></tr></thead><tbody id="historyBody"><tr><td colspan="5" class="muted-cell">No scans yet. Run your first scan above.</td></tr></tbody></table></div></div>
+  </section>
+
+  <section class="section two-column" id="report">
+    <div><span class="eyebrow">HELP THE COMMUNITY</span><h2>Report a fraud incident</h2><p class="section-description">Share details of a suspected fraud incident. Do not include passwords, PINs or other secret information.</p>
+      <div class="info-note">ⓘ Reports submitted in this demo are stored temporarily in memory and are not sent to a government authority.</div>
+    </div>
+    <form class="panel report-form" id="reportForm">
+      <label>Incident title<input name="title" required placeholder="Example: Suspicious UPI payment request"></label>
+      <label>Fraud type<select name="fraud_type" required><option value="">Select fraud type</option><option>UPI Scam</option><option>Phishing</option><option>Investment Fraud</option><option>Identity Theft</option><option>Online Shopping Fraud</option><option>Other</option></select></label>
+      <label>Location<input name="location" required placeholder="City / State"></label>
+      <label>Amount lost (₹)<input name="amount_lost" type="number" min="0" step="0.01" value="0"></label>
+      <label class="full-field">Description<textarea name="description" rows="3" required placeholder="Describe what happened..."></textarea></label>
+      <label class="check-label full-field"><input type="checkbox" name="anonymous"> Submit anonymously</label>
+      <button class="primary-btn full-field" type="submit">Submit report <span>→</span></button>
+      <p class="form-message full-field" id="reportMessage" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <section class="section" id="alerts">
+    <div class="section-heading"><div><span class="eyebrow">AWARENESS FEED</span><h2>Sample fraud alerts</h2><p>Illustrative examples returned by the demo API, not verified live statistics.</p></div><span class="section-number">03 / ALERTS</span></div>
+    <div class="alerts-grid" id="alertsGrid"><div class="panel alert-card">Loading sample alerts…</div></div>
+  </section>
+
+  <section class="section safety-strip"><div class="safety-icon">✓</div><div><h2>Pause. Check. Then proceed.</h2><p>Never share your OTP, PIN, password or banking details with an unknown person.</p></div><a href="#scanner">Scan content ↑</a></section>
+</main>
+
+<footer><a class="brand" href="#"><span class="brand-icon">盾</span><span>Fraud<span class="brand-accent">Scanner</span></span></a><p>Educational fraud-awareness demo. Results are indicative, not definitive security verification.</p><span>© <span id="year"></span> Fraud Scanner App</span></footer>
+
+<div class="modal-backdrop hidden" id="authModal">
+  <div class="modal panel"><button class="modal-close" id="closeModal" aria-label="Close">×</button><span class="eyebrow">USER ACCOUNT</span><h2 id="authTitle">Login</h2>
+    <div class="tabs auth-tabs"><button class="tab active" data-auth="login">Login</button><button class="tab" data-auth="register">Register</button></div>
+    <form id="authForm"><label>Username<input name="username" required autocomplete="username"></label><label id="emailField" class="hidden">Email<input name="email" type="email" autocomplete="email"></label><label>Password<input name="password" type="password" minlength="8" required autocomplete="current-password"></label><button class="primary-btn" type="submit" id="authSubmit">Login</button><p class="form-message" id="authMessage" aria-live="polite"></p></form>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
